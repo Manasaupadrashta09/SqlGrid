@@ -19,7 +19,7 @@
         xsi:schemaLocation="urn:org:jgroups file:schema/JGroups-2.8.xsd">
     <UDP
             bind_addr="${jgroups.bind_addr:10.1.35.23}"
-            mcast_addr="${jgroups.udp.mcast_addr:228.6.7.8}"
+            mcast_addr="${jgroups.udp.mcast_addr:10.1.35.23}"
             mcast_port="${jgroups.udp.mcast_port:11222}"
             tos="8"
             ucast_recv_buf_size="20000000"
