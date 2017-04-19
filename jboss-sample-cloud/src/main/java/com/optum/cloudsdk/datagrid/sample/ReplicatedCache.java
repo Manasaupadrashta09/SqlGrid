@@ -35,8 +35,8 @@ public class ReplicatedCache {
         builder.nearCache()
         .mode(NearCacheMode.LAZY)
         .maxEntries(500).addServer()
-        .host("10.1.35.23")
-        .port(11333);
+        .host("10.1.26.8")
+        .port(11222);
         return new RemoteCacheManager(builder.build(), true);
     }
 
