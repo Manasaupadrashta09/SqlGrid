@@ -13,6 +13,7 @@ public class TestDistributed {
   public static  void main(String[] args) throws Exception {
       DistributedCache dc = new DistributedCache();
       dc.saveData("cache1", "Hi This is Distributed Cache Example");
-      dc.readData();
+      dc.readData("cache1");
   }
 }
+

@@ -5,7 +5,6 @@ package com.optum.cloudsdk.datagrid.sample;
  * and open the template in the editor.
  */
 
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.infinispan.Cache;
@@ -18,32 +17,26 @@ import org.infinispan.client.hotrod.RemoteCache;
 import org.infinispan.client.hotrod.RemoteCacheManager;
 import org.infinispan.client.hotrod.configuration.NearCacheMode;
 import org.infinispan.client.hotrod.marshall.ProtoStreamMarshaller;
-import org.infinispan.configuration.cache.Configuration;
-import org.infinispan.configuration.global.GlobalConfiguration;
 
 /**
  *
  * @author
  */
 public class DistributedCache {
-private Logger log;
-    public DefaultCacheManager getCacheManager() throws Exception {
-        DefaultCacheManager manager ;
-           GlobalConfiguration glob = new GlobalConfigurationBuilder().clusteredDefault() // Builds a default clustered
-                                                                                           // configuration
-                    .transport().addProperty("configurationFile", "jgroups-udp.xml") // provide a specific JGroups configuration
-                    .globalJmxStatistics().allowDuplicateDomains(true).enable() // This method enables the jmx statistics of
-                    // the global configuration and allows for duplicate JMX domains
-                    .build(); // Builds the GlobalConfiguration object
-            Configuration loc = new ConfigurationBuilder().jmxStatistics().enable() // Enable JMX statistics
-                    .clustering().cacheMode(CacheMode.DIST_SYNC) // Set Cache mode to DISTRIBUTED with SYNCHRONOUS replication
-                    .hash().numOwners(2) // Keeps two copies of each key/value pair
-                    .expiration().lifespan(60 * 1000) // Set expiration - cache entries expire after some time (given by
-                    // the lifespan parameter) and are removed from the cache (cluster-wide).
-                    .build();
-            manager = new DefaultCacheManager(glob, loc, true);
-            return manager;
 
+    public RemoteCacheManager getCacheManager() throws Exception {
+    	org.infinispan.client.hotrod.configuration.ConfigurationBuilder builder = new org.infinispan.client.hotrod.configuration.ConfigurationBuilder();
+	//Another way to addserver to builder
+        //.addServer().host("localhost").port(11322);
+        
+        builder
+			.nearCache()
+				.mode(NearCacheMode.LAZY)
+				.maxEntries(500)
+			.addServer()
+			.host("10.1.35.23")
+			.port(11222);
+			return new RemoteCacheManager(builder.build(), true);
     }
 
     public void saveData(String inputKey, String inputValue) {
@@ -53,48 +46,31 @@ private Logger log;
         ConfigurationBuilder builder = new ConfigurationBuilder();
         builder.clustering().cacheMode(CacheMode.DIST_SYNC);
         // Initialize the cache manager
-        DefaultCacheManager cacheManager = null;
+        RemoteCacheManager cacheManager = null;
         try {
             cacheManager = getCacheManager();
         } catch (Exception ex) {
             Logger.getLogger(DistributedCache.class.getName()).log(Level.SEVERE, null, ex);
         }
         // Obtain the default cache
-        Cache<String, String> cache = cacheManager.getCache();
+        RemoteCache<String, String> cache = cacheManager.getCache();
         // Store the current node address in some random keys. 
-
+        System.out.println("Data Saving to Cache.......");
         cache.put(inputKey, inputValue);
 
-        log.info("put: " + inputKey + " " + inputValue);
         cacheManager.stop();
     }
 
-    public void readData() {
-        DefaultCacheManager cacheManager = null;
-        StringBuffer allKeyValues = new StringBuffer();
-        String message;
+    public void readData(String cacheName) {
+        RemoteCacheManager cacheManager = null;
         try {
             cacheManager = getCacheManager();
         } catch (Exception ex) {
             Logger.getLogger(DistributedCache.class.getName()).log(Level.SEVERE, null, ex);
         }
         // Obtain the default cache
-        Cache<String, String> cache = cacheManager.getCache();
-                Set<String> keySet = cache.keySet();
-        for (String key : keySet) {
-
-            String value = cache.get(key);
-            log.info("key: " + key + " value: " + value);
-
-            allKeyValues.append(key + "=" + value + ", ");
-        } // for
-
-        if (allKeyValues == null || allKeyValues.length() == 0) {
-            message = "Nothing in the Cache";
-        } else {
-            // remote trailing comma
-            allKeyValues.delete(allKeyValues.length() - 2, allKeyValues.length());
-            message = allKeyValues.toString();
-        }
+        RemoteCache<String, String> cache = cacheManager.getCache(cacheName);
+        System.out.println(cache.values());
+        cacheManager.stop();
     }
 }
