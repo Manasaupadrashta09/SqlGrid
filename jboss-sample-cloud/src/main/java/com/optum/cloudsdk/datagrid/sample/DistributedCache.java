@@ -39,7 +39,7 @@ public class DistributedCache {
 				.maxEntries(500)
 			.addServer()
 			.host("10.1.35.23")
-			.port(11222);
+			.port(1133);
 			return new RemoteCacheManager(builder.build(), true);
     }
     
