@@ -29,11 +29,12 @@ import com.optum.cloudsdk.datagrid.sample.DistributedCache;
  */
 public class ReplicatedCache {
 	private static final String ENV_VAR_JDG_SERVICE_NAME = "JDG_SERVICE_NAME";
-	private static final String ENV_VAR_SUFFIX_HOTROD_SERVICE_PORT = "11222";
-	private static final String ENV_VAR_SUFFIX_HOTROD_SERVICE_HOST = "10.1.31.4";
+	private static final String ENV_VAR_SUFFIX_HOTROD_SERVICE_PORT = "_HOTROD_SERVICE_PORT";
+	private static final String ENV_VAR_SUFFIX_HOTROD_SERVICE_HOST = "_HOTROD_SERVICE_HOST";
 
     public RemoteCacheManager getCacheManager() throws Exception {
     	org.infinispan.client.hotrod.configuration.ConfigurationBuilder builder = new org.infinispan.client.hotrod.configuration.ConfigurationBuilder();
+    	
         //Another way to addserver to builder
         //builder.addServer().host("localhost").port(11322);
         builder.nearCache()
