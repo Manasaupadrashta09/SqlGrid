@@ -28,7 +28,7 @@ import com.optum.cloudsdk.datagrid.sample.DistributedCache;
  * @author
  */
 public class ReplicatedCache {
-	private static final String ENV_VAR_JDG_SERVICE_NAME = "GRID_SAMPLE";
+	private static final String ENV_VAR_JDG_SERVICE_NAME = "JDG_SERVICE_NAME";
 	private static final String ENV_VAR_SUFFIX_HOTROD_SERVICE_PORT = "11222";
 	private static final String ENV_VAR_SUFFIX_HOTROD_SERVICE_HOST = "10.1.35.23";
 
@@ -40,7 +40,7 @@ public class ReplicatedCache {
         .mode(NearCacheMode.LAZY)
         .maxEntries(500).addServer()
         .host("10.1.35.23")
-        .port(11333);
+        .port(11222);
         return new RemoteCacheManager(builder.build(), true);
     }
     

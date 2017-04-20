@@ -24,7 +24,7 @@ import org.infinispan.client.hotrod.marshall.ProtoStreamMarshaller;
  * @author
  */
 public class DistributedCache {
-	private static final String ENV_VAR_JDG_SERVICE_NAME = "GRID_SAMPLE";
+	private static final String ENV_VAR_JDG_SERVICE_NAME = "JDG_SERVICE_NAME";
 	private static final String ENV_VAR_SUFFIX_HOTROD_SERVICE_PORT = "11222";
 	private static final String ENV_VAR_SUFFIX_HOTROD_SERVICE_HOST = "10.1.35.23";
 
@@ -39,7 +39,7 @@ public class DistributedCache {
 				.maxEntries(500)
 			.addServer()
 			.host("10.1.35.23")
-			.port(1133);
+			.port(11222);
 			return new RemoteCacheManager(builder.build(), true);
     }
     
