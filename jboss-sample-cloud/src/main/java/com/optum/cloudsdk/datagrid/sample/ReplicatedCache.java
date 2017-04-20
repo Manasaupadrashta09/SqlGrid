@@ -65,6 +65,7 @@ public class ReplicatedCache {
             cacheManager = getCacheManager();
         } catch (Exception ex) {
             //Logger.getLogger(com.optum.cloudsdk.datagrid.sample.DistributedCache.class.getName()).log(Level.SEVERE, null, ex);
+        	ex.printStackTrace();
         	logger.error("Error occured:"+ex.getMessage());
 
         }
