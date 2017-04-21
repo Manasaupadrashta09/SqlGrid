@@ -25,8 +25,6 @@ import org.infinispan.client.hotrod.marshall.ProtoStreamMarshaller;
  */
 public class DistributedCache {
 	private static final String ENV_VAR_JDG_SERVICE_NAME = "JDG_SERVICE_NAME";
-	private static final String ENV_VAR_SUFFIX_HOTROD_SERVICE_PORT = "_HOTROD_SERVICE_PORT";
-	private static final String ENV_VAR_SUFFIX_HOTROD_SERVICE_HOST = "_HOTROD_SERVICE_HOST";
 	final static Logger logger = Logger.getLogger(DistributedCache.class);
 	
 
@@ -42,7 +40,7 @@ public class DistributedCache {
 				.mode(NearCacheMode.LAZY)
 				.maxEntries(500)
 			.addServer()
-			.host("datagrid-app-1-8zkf7")
+			.host("10.1.48.21")
 			.port(11333);
         System.out.println(" ## Just making sure ##");
 			return new RemoteCacheManager(builder.build(), true);
