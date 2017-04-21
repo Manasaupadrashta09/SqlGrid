@@ -42,7 +42,7 @@ public class ReplicatedCache {
         builder.nearCache()
         .mode(NearCacheMode.LAZY)
         .maxEntries(500).addServer()
-        .host("10.1.54.14")
+        .host("10.1.54.19")
         .port(11333);
         System.out.println(" ## Just making sure ##");
 
