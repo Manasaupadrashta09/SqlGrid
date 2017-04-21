@@ -1,44 +1,48 @@
+<?xml version="1.0"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>jboss-sample-cloud</groupId>
-	<artifactId>jboss-sample-cloud</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-	<properties>
-		<!-- Explicitly declaring the source encoding eliminates the following 
-			message: -->
-		<!-- [WARNING] Using platform encoding (UTF-8 actually) to copy filtered 
-			resources, i.e. build is platform dependent! -->
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <groupId>com.optum.cloudsdk.datagrid.sample</groupId>
+    <artifactId>jboss-sample-cloud</artifactId>
+    <version>4.2.0-SNAPSHOT</version>
+    <packaging>war</packaging>
+    <name>jboss-sample-cloud</name>
+	
+    <properties>
+        <!-- Explicitly declaring the source encoding eliminates the following
+        message: -->
+        <!-- [WARNING] Using platform encoding (UTF-8 actually) to copy filtered
+        resources, i.e. build is platform dependent! -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-		<!-- JBoss dependency versions -->
-		<version.jboss.maven.plugin>7.4.Final</version.jboss.maven.plugin>
+        <!-- JBoss dependency versions -->
+        <version.jboss.maven.plugin>7.4.Final</version.jboss.maven.plugin>
 
-		<version.org.infinispan>6.4.0.Final-redhat-4</version.org.infinispan>
+        <version.org.infinispan>6.4.0.Final-redhat-4</version.org.infinispan>
 
-		<version.jboss.spec.javaee.6.0>3.0.2.Final-redhat-4</version.jboss.spec.javaee.6.0>
+        <version.jboss.spec.javaee.6.0>3.0.2.Final-redhat-4</version.jboss.spec.javaee.6.0>
 
-		<!-- other plugin versions -->
-		<version.buildhelper.maven.plugin>1.7</version.buildhelper.maven.plugin>
-		<war.plugin.version>2.2</war.plugin.version>
-		<version.maven.surefire>2.14</version.maven.surefire>
+        <!-- other plugin versions -->
+        <version.buildhelper.maven.plugin>1.7</version.buildhelper.maven.plugin>
+        <war.plugin.version>2.2</war.plugin.version>
+        <version.maven.surefire>2.14</version.maven.surefire>
 
-		<!-- maven-compiler-plugin -->
-		<maven.compiler.target>1.8</maven.compiler.target>
-		<maven.compiler.source>1.8</maven.compiler.source>
+        <!-- maven-compiler-plugin -->
+        <maven.compiler.target>1.7</maven.compiler.target>
+        <maven.compiler.source>1.7</maven.compiler.source>
 
-		<!-- test dependencies versions -->
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<junit.version>4.8.2</junit.version>
-		<arquillian.bom.version>1.1.1.Final</arquillian.bom.version>
-		<arquillian.drone.bom.version>1.2.0.Beta1</arquillian.drone.bom.version>
-		<jboss.as7.version>7.2.0.Final</jboss.as7.version>
-		<arquillian.selenium.version>2.35.0</arquillian.selenium.version>
-		<arquillian.graphene.version>2.0.0.Beta1</arquillian.graphene.version>
-		<browser>phantomjs</browser>
-		<test.server.config>standalone.xml</test.server.config>
-	</properties>
+        <!-- test dependencies versions -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <junit.version>4.8.2</junit.version>
+        <arquillian.bom.version>1.1.1.Final</arquillian.bom.version>
+        <arquillian.drone.bom.version>1.2.0.Beta1</arquillian.drone.bom.version>
+        <jboss.as7.version>7.2.0.Final</jboss.as7.version>
+        <arquillian.selenium.version>2.35.0</arquillian.selenium.version>
+        <arquillian.graphene.version>2.0.0.Beta1</arquillian.graphene.version>
+        <browser>phantomjs</browser>
+        <test.server.config>standalone.xml</test.server.config>
+    </properties>
 
 	<dependencyManagement>
 		<dependencies>
@@ -214,60 +218,51 @@
 			<artifactId>infinispan-embedded</artifactId>
 		</dependency>
 
-		<!-- Import the Servlet API, we use provided scope as the API is included 
-			in JBoss AS 7 -->
-		<dependency>
-			<groupId>org.jboss.spec.javax.servlet</groupId>
-			<artifactId>jboss-servlet-api_3.0_spec</artifactId>
-			<scope>provided</scope>
-		</dependency>
+		 <!-- Import the CDI API, we use provided scope as the API is included
+            in JBoss AS 7 -->
+        <dependency>
+            <groupId>javax.enterprise</groupId>
+            <artifactId>cdi-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+<!-- Import the Servlet API, we use provided scope as the API is included
+             in JBoss AS 7 -->
+        <dependency>
+            <groupId>org.jboss.spec.javax.servlet</groupId>
+            <artifactId>jboss-servlet-api_3.0_spec</artifactId>
+            <scope>provided</scope>
+        </dependency>
 
-		<!-- Import the CDI API, we use provided scope as the API is included in 
-			JBoss AS 7 -->
-		<dependency>
-			<groupId>javax.enterprise</groupId>
-			<artifactId>cdi-api</artifactId>
-			<scope>provided</scope>
-		</dependency>
 
-		<!-- Import the JSF API, we use provided scope as the API is included in 
-			JBoss AS 7 -->
-		<dependency>
-			<groupId>org.jboss.spec.javax.faces</groupId>
-			<artifactId>jboss-jsf-api_2.1_spec</artifactId>
-			<scope>provided</scope>
-		</dependency>
+		    <!-- Test dependencies -->
+         <dependency>
+            <groupId>org.jboss.arquillian.junit</groupId>
+            <artifactId>arquillian-junit-container</artifactId>
+            <scope>test</scope>
+            <version>${arquillian.bom.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.as</groupId>
+            <artifactId>jboss-as-arquillian-container-managed</artifactId>
+            <version>${jboss.as7.version}</version>
+        </dependency>
 
-		<!-- Test dependencies -->
-		<dependency>
-			<groupId>org.jboss.arquillian.junit</groupId>
-			<artifactId>arquillian-junit-container</artifactId>
-			<scope>test</scope>
-			<version>${arquillian.bom.version}</version>
-		</dependency>
+        <dependency>
+            <groupId>org.jboss.arquillian.graphene</groupId>
+            <artifactId>graphene-webdriver</artifactId>
+            <version>${arquillian.graphene.version}</version>
+            <type>pom</type>
+            <scope>test</scope>
+        </dependency>
 
-		<dependency>
-			<groupId>org.jboss.as</groupId>
-			<artifactId>jboss-as-arquillian-container-managed</artifactId>
-			<version>${jboss.as7.version}</version>
-		</dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
 
-		<dependency>
-			<groupId>org.jboss.arquillian.graphene</groupId>
-			<artifactId>graphene-webdriver</artifactId>
-			<version>${arquillian.graphene.version}</version>
-			<type>pom</type>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>${junit.version}</version>
-			<scope>test</scope>
-		</dependency>
-
-	</dependencies>
+    </dependencies>
 
 	<build>
 		<!-- export browser property to arquillian.xml -->
