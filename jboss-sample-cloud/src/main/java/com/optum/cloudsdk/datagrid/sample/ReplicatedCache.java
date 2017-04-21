@@ -19,8 +19,6 @@ import java.util.UUID;
 /*import java.util.logging.Level;
 import java.util.logging.Logger;*/
 import org.apache.log4j.Logger;
-
-
 import org.infinispan.client.hotrod.RemoteCache;
 import org.infinispan.client.hotrod.RemoteCacheManager;
 import com.optum.cloudsdk.datagrid.sample.DistributedCache;
@@ -32,7 +30,7 @@ public class ReplicatedCache {
 	private static final String ENV_VAR_JDG_SERVICE_NAME = "JDG_SERVICE_NAME";
 	private static final String ENV_VAR_SUFFIX_HOTROD_SERVICE_PORT = "_HOTROD_SERVICE_PORT";
 	private static final String ENV_VAR_SUFFIX_HOTROD_SERVICE_HOST = "_HOTROD_SERVICE_HOST";
-	final static Logger logger = Logger.getLogger(DistributedCache.class);
+	final static Logger logger = Logger.getLogger(ReplicatedCache.class);
 
     public RemoteCacheManager getCacheManager() throws Exception {
     	org.infinispan.client.hotrod.configuration.ConfigurationBuilder builder = new org.infinispan.client.hotrod.configuration.ConfigurationBuilder();
@@ -44,7 +42,7 @@ public class ReplicatedCache {
         builder.nearCache()
         .mode(NearCacheMode.LAZY)
         .maxEntries(500).addServer()
-        .host("10.1.31.4")
+        .host("10.1.54.14")
         .port(11333);
         System.out.println(" ## Just making sure ##");
 

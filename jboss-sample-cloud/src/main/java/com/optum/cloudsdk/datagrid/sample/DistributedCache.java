@@ -28,6 +28,8 @@ public class DistributedCache {
 	private static final String ENV_VAR_SUFFIX_HOTROD_SERVICE_PORT = "_HOTROD_SERVICE_PORT";
 	private static final String ENV_VAR_SUFFIX_HOTROD_SERVICE_HOST = "_HOTROD_SERVICE_HOST";
 	final static Logger logger = Logger.getLogger(DistributedCache.class);
+	
+
 
     public RemoteCacheManager getCacheManager() throws Exception {
     	org.infinispan.client.hotrod.configuration.ConfigurationBuilder builder = new org.infinispan.client.hotrod.configuration.ConfigurationBuilder();
@@ -40,7 +42,7 @@ public class DistributedCache {
 				.mode(NearCacheMode.LAZY)
 				.maxEntries(500)
 			.addServer()
-			.host("10.1.31.4")
+			.host("10.1.54.14")
 			.port(11333);
         System.out.println(" ## Just making sure ##");
 			return new RemoteCacheManager(builder.build(), true);
