@@ -42,7 +42,7 @@ public class DistributedCache {
 				.mode(NearCacheMode.LAZY)
 				.maxEntries(500)
 			.addServer()
-			.host("10.1.54.19")
+			.host("10.1.6.7")
 			.port(11333);
         System.out.println(" ## Just making sure ##");
 			return new RemoteCacheManager(builder.build(), true);
