@@ -42,7 +42,7 @@ public class DistributedCache {
 				.mode(NearCacheMode.LAZY)
 				.maxEntries(500)
 			.addServer()
-			.host("10.1.48.21")
+			.host("datagrid-app-1-8zkf7")
 			.port(11333);
         System.out.println(" ## Just making sure ##");
 			return new RemoteCacheManager(builder.build(), true);
