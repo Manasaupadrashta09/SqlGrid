@@ -100,6 +100,7 @@ public class ReplicatedCache {
         	logger.error("Error occured:"+ex.getMessage());
 
         }
+        if(cacheManager!=null){
         // Obtain the default cache
         RemoteCache<String, String> cache = cacheManager.getCache();
         // Store the current node address in some random keys. 
@@ -107,19 +108,22 @@ public class ReplicatedCache {
         cache.put("value", "value");
 
         cacheManager.stop();
-    }
+    }}
 
     public void readData(String cacheName) {
         RemoteCacheManager cacheManager = null;
+
         try {
+
             cacheManager = getCacheManager();
         } catch (Exception ex) {
             //Logger.getLogger(ReplicatedCache.class.getName()).log(Level.SEVERE, null, ex);
         	logger.error("Error occured:"+ex.getMessage());
 
         }
+        if(cacheManager!=null){
         // Obtain the default cache
         RemoteCache<String, String> cache = cacheManager.getCache(cacheName);
         System.out.println(cache.values());
     }
-}
+}}

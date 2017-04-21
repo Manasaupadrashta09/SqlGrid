@@ -98,13 +98,14 @@ public class DistributedCache {
         	logger.error("Error occured:"+ex.getMessage());
         }
         // Obtain the default cache
+        if(cacheManager!=null){
         RemoteCache<String, String> cache = cacheManager.getCache();
         // Store the current node address in some random keys. 
         System.out.println("Data Saving to Cache.......");
         cache.put("value", "value");
 
         cacheManager.stop();
-    }
+    }}
 
     public void readData(String cacheName) {
         RemoteCacheManager cacheManager = null;
@@ -114,9 +115,10 @@ public class DistributedCache {
             //Logger.getLogger(DistributedCache.class.getName()).log(Level.SEVERE, null, ex);
         	logger.error("Error occured:"+ex.getMessage());
         }
+        if(cacheManager!=null){
         // Obtain the default cache
         RemoteCache<String, String> cache = cacheManager.getCache(cacheName);
         System.out.println(cache.values());
         cacheManager.stop();
     }
-}
+}}
