@@ -43,8 +43,8 @@ public class ReplicatedCache {
         builder.nearCache()
         .mode(NearCacheMode.LAZY)
         .maxEntries(500).addServer()
-        .host(getHotRodHostFromEnvironment())
-        .port(getHotRodPortFromEnvironment());
+        .host("10.1.29.3")
+        .port(11333);
         System.out.println(" ## Just making sure ##");
 
         return new RemoteCacheManager(builder.build(), true);

@@ -43,7 +43,7 @@ public class DistributedCache {
 				.mode(NearCacheMode.LAZY)
 				.maxEntries(500)
 			.addServer()
-			.host("10.1.3.43")
+			.host("10.1.29.3")
 			.port(11333);
         System.out.println(" ## Just making sure ##");
         System.out.println(" printing Host ");
