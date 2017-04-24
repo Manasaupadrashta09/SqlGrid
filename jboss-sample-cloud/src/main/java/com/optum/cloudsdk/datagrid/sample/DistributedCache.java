@@ -43,9 +43,11 @@ public class DistributedCache {
 				.mode(NearCacheMode.LAZY)
 				.maxEntries(500)
 			.addServer()
-			.host(getHotRodHostFromEnvironment())
-			.port(getHotRodPortFromEnvironment());
+			.host("10.1.3.43")
+			.port(11333);
         System.out.println(" ## Just making sure ##");
+        System.out.println(" printing Host ");
+
 			return new RemoteCacheManager(builder.build(), true);
     }
     
@@ -92,17 +94,22 @@ public class DistributedCache {
         // Initialize the cache manager
         RemoteCacheManager cacheManager = null;
         try {
+            System.out.println(" ## Message1 ##");
             cacheManager = getCacheManager();
         } catch (Exception ex) {
            // Logger.getLogger(DistributedCache.class.getName()).log(Level.SEVERE, null, ex);
         	logger.error("Error occured:"+ex.getMessage());
         }
+        System.out.println(" ## Message2 ##");
+
         // Obtain the default cache
         if(cacheManager!=null){
         RemoteCache<String, String> cache = cacheManager.getCache();
         // Store the current node address in some random keys. 
         System.out.println("Data Saving to Cache.......");
         cache.put("value", "value");
+        System.out.println(" ## Message3 ##");
+
 
         cacheManager.stop();
     }}
@@ -110,6 +117,8 @@ public class DistributedCache {
     public void readData(String cacheName) {
         RemoteCacheManager cacheManager = null;
         try {
+            System.out.println(" ## Message4 ##");
+
             cacheManager = getCacheManager();
         } catch (Exception ex) {
             //Logger.getLogger(DistributedCache.class.getName()).log(Level.SEVERE, null, ex);
